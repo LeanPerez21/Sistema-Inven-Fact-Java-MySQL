@@ -2,9 +2,9 @@ package ConexionBD;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-//import java.sql.ResultSet;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-//import java.sql.Statement;
+import java.sql.Statement;
 import javax.swing.JOptionPane;
 
 /**
@@ -35,19 +35,19 @@ public class Conexion {
         return con;
     }
      
-//     public ResultSet consultar(String sql) {
-//         ResultSet resultado;
-//         try {
-//             Statement sentencia;
-//             sentencia = conexion().createStatement();
-//             resultado = sentencia.executeQuery(sql);
-//         } catch (SQLException e) {
-//             JOptionPane.showMessageDialog(null, "Error sql consultar" + e);
-//             return null;
-//         }  
-//         
-//         return resultado;
-//     }
+     public ResultSet consultar(String sql) {
+         ResultSet resultado;
+         try {
+             Statement sentencia;
+             sentencia = getConnection().createStatement();
+             resultado = sentencia.executeQuery(sql);
+         } catch (SQLException e) {
+             JOptionPane.showMessageDialog(null, "Error sql consultar" + e);
+             return null;
+         }  
+         
+         return resultado;
+     }
 
 
 }
