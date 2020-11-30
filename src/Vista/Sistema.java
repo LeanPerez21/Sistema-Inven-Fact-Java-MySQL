@@ -5,6 +5,7 @@
  */
 package Vista;
 
+import ConexionBD.Conexion;
 import Modelo.Cliente;
 import Modelo.ClienteCRUD;
 import Modelo.Empleado;
@@ -16,12 +17,20 @@ import Modelo.ProveedorCRUD;
 import Modelo.Venta;
 import Modelo.VentaCRUD;
 import java.awt.event.KeyEvent;
+import java.sql.Connection;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
+import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -1592,6 +1601,24 @@ public class Sistema extends javax.swing.JFrame {
 
     private void btnPdfVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPdfVentasActionPerformed
 
+        try {
+        Conexion conn2 = new Conexion();
+        Connection connn = conn2.getConnection();
+        
+        JasperReport reporte = null;
+        String path;
+        path = "C:\\Users\\Leandro\\Desktop\\Sistema Inventario Final\\SIstemaInventarioFinal\\src\\Reportes\\ReporteVentas.jasper";
+        
+            reporte = (JasperReport) JRLoader.loadObjectFromFile(path);
+            JasperPrint jprint = JasperFillManager.fillReport(path,null,connn);
+            JasperViewer view = new JasperViewer(jprint,false);
+            view.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            view.setVisible(true);
+            
+        } catch (JRException ex) {
+            java.util.logging.Logger.getLogger(Sistema.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        
     }//GEN-LAST:event_btnPdfVentasActionPerformed
 
     private void TableVentasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TableVentasMouseClicked
